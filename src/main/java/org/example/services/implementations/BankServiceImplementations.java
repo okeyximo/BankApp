@@ -17,7 +17,6 @@ public class BankServiceImplementations implements IBankServiceImplementation {
     }
 
     /* SINGLETON CLASS */
-
     public static BankServiceImplementations getInstance() {
         return SINGLE_INSTANCE;
     }
@@ -27,13 +26,14 @@ public class BankServiceImplementations implements IBankServiceImplementation {
     public boolean validateLogin(String username, String password) {
         if (this.bank.getCustomers().containsKey(username) && this.bank.getCustomers().get(username).getPassword().equals(password)) {
             System.out.println("Successful Login");
+            bank.getTrackLogin().add(username);
+            System.out.println(username + " ********");
             return true;
         }
         System.out.println("Invalid UserName or password");
         return false;
     }
 
-//                "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–{}:;',?/*~$^+=<>]).{6}$";
     public boolean passwordValidator(String password) {
         String PASSWORD_PATTERN = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,}$";
         Pattern pattern = Pattern.compile(PASSWORD_PATTERN);
@@ -61,11 +61,13 @@ public class BankServiceImplementations implements IBankServiceImplementation {
      * @param username of customer
      * @return false if it exists and true if it does not exist.
      */
-    private boolean usernameValidator(String username) {
+    public boolean usernameValidator(String username) {
         if (bank.getCustomers().containsKey(username)) {
             System.out.println("Username already exist");
+
             return false;
         }
+
         return true;
     }
 
@@ -76,5 +78,17 @@ public class BankServiceImplementations implements IBankServiceImplementation {
             this.bank.getCustomers().put(userName, newUser);
             System.out.println("Welcome to our bank " + newUser.getFullName());
         }
+    }
+
+    public static void setTimeout(Runnable runnable, int delay) {
+        new Thread(() -> {
+            try {
+                Thread.sleep(delay);
+                runnable.run();
+            } catch (Exception e) {
+                System.err.println(e);
+            }
+        }).start();
+//        setTimeout(() -> System.out.println("test"), 5000);
     }
 }

@@ -10,13 +10,12 @@ import java.util.Scanner;
 public class MainMenu {
 
     public static BankServiceImplementations bsi = BankServiceImplementations.getInstance();
-    public static String username = "";
-    static Scanner scanner = new Scanner(System.in);
+    public static Scanner scanner = new Scanner(System.in);
 
     public static void displayMainMenu(Scanner scanner) {
         showMainMenu();
         int selection = -1;
-        while (selection != 3) {
+        while (selection != 4) {
             try {
                 selection = Integer.parseInt(scanner.nextLine());
                 switch (selection) {
@@ -26,7 +25,6 @@ public class MainMenu {
                         displaySeparatorLine();
                         break;
                     case 2:
-                        //if Successfully login
                         if (validateLogin()) {
                             SubMenu.displaySubMenu(scanner);
                         }
@@ -34,13 +32,26 @@ public class MainMenu {
                         showMainMenu();
                         break;
                     case 3:
+                        // show admin panel adminUsername and password  is needed.
+                        System.out.println("Do something for admin");
+                        if (validateAdminLogin()){
+                            AdminMenu.displayAdminMenu(scanner);
+                        }
+                        showMainMenu();
+                        break;
+                    case 4:
                         System.out.println("Exit from menu now");
                         break;
+                    case 5:
+                        //
+                        SubMenu.displaySubMenu(scanner);
+                        showMainMenu();
+                        break;
                     default:
-                        System.out.println("Please select 1 to 3");
+                        System.out.println("Please select 1 to 4");
                 }
             } catch (NumberFormatException nfe) {
-                System.out.println("Select from 1 to 3");
+                System.out.println("Select from 1 to 4");
             }
         }
     }
@@ -64,7 +75,6 @@ public class MainMenu {
     private static boolean validateLogin() {
         System.out.println("Enter your username");
         String username = scanner.nextLine();
-        MainMenu.username = username;
         System.out.println("Enter your password");
         String password = scanner.nextLine();
         return bsi.validateLogin(username, password);
@@ -126,12 +136,13 @@ public class MainMenu {
         System.out.println("Please select 1 to 3");
         System.out.println("1. Sign up");
         System.out.println("2. Sign In");
-        System.out.println("3. To Quit");
+        System.out.println("3. Admin Login");
+        System.out.println("4. To Quit");
+        System.out.println("5. To debug");
     }
 
-    public static String getName(){
-        return MainMenu.username;
+    private static boolean validateAdminLogin(){
+        return false;
     }
-
 }
 

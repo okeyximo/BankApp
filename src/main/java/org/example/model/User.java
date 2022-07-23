@@ -1,6 +1,8 @@
 package org.example.model;
 
-import java.util.HashMap;
+//import java.util.HashMap;
+//import java.util.LinkedHashMap;
+import java.util.*;
 import java.util.regex.Pattern;
 
 public class User {
@@ -13,7 +15,8 @@ public class User {
 
 
 
-    private final HashMap<String, Account> userAccounts;
+    private final Map<String, Account> userAccounts;
+    private List<String> accountNumberTracker;
 
     /* CONSTRUCTOR GETTERS AND SETTERS */
 
@@ -23,7 +26,8 @@ public class User {
         this.email = email;
         this.password = password;
         this.username = username;
-        this.userAccounts = new HashMap<>();
+        this.userAccounts = new LinkedHashMap<>();
+        this.accountNumberTracker = new ArrayList<>();
     }
 
     public User() {
@@ -70,7 +74,7 @@ public class User {
         this.username = username;
     }
 
-    public HashMap<String, Account> getUserAccounts() {
+    public Map<String, Account> getUserAccounts() {
         return userAccounts;
     }
 
@@ -84,6 +88,9 @@ public class User {
         return "User{" +
                 "surname='" + surname + '\'' +
                 ", firstname='" + firstname + '\'' +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", accountNumber='" + accountNumber + '\'' +
                 '}';
     }
 
@@ -94,5 +101,9 @@ public class User {
 
     public void setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
+    }
+
+    public List<String> getAccountNumberTracker() {
+        return accountNumberTracker;
     }
 }

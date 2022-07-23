@@ -44,12 +44,12 @@ public class UserServiceImplementation implements IUserServiceImplementation {
             newAccount.setAccountBalance(0.0);
             user.setAccountNumber(accountNumber); // temporary
             user.getUserAccounts().put(newAccount.getAccountNumber(), newAccount);
+            user.getAccountNumberTracker().add(accountNumber);
             bank.getAccountNumbers().put(newAccount.getAccountNumber(), user);
             System.out.println("Your account opening is successful.\nHere is your account number " + accountNumber);
         }
         else {
             System.out.println("Register first");
         }
-
     }
 }

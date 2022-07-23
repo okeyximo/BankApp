@@ -29,6 +29,8 @@ public class Testing {
 // opening of account
         usi.createAccount(u2, AccountType.SAVINGS);
         usi.createAccount(u1, AccountType.CURRENT);
+        usi.createAccount(u1, AccountType.CURRENT);
+        usi.createAccount(u1, AccountType.SAVINGS);
 // deposit
         asi.deposit(u2, "October savings", 2000.0, u2.getAccountNumber());
         asi.deposit(u2, "flexing", 1000.0, u2.getAccountNumber());
@@ -39,7 +41,11 @@ public class Testing {
         asi.getStatementOfAccount(u1.getUserAccounts().get(u1.getAccountNumber()));
         asi.getStatementOfAccount(u2.getUserAccounts().get(u2.getAccountNumber()));
         asi.getAccountDetails(u1);
+//        asi.selectAccount(u1);
 //        asi.getStatementOfAccount(u1.getUserAccounts().get(u1.getAccountNumber()));
 
+
     }
+
+
 }

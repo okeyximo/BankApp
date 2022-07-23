@@ -24,6 +24,14 @@ public class AccountServiceImplementation implements IAccountServiceImplementati
     /* ASI methods */
     Bank bank = Bank.getInstance();
 
+    /**
+     * Deposits the amount into the customers account.
+     * @param user performing the transaction
+     * @param description of the transaction
+     * @param amount to be deposited
+     * @param accountNumber in which the money is to be deposited
+     * @return true on success and false on failure.
+     */
     public boolean deposit(User user, String description, Double amount, String accountNumber) {
         if (user.getUserAccounts().containsKey(accountNumber)) {
             Account userAccount = user.getUserAccounts().get(accountNumber);
@@ -76,8 +84,11 @@ public class AccountServiceImplementation implements IAccountServiceImplementati
     }
 
     public void getAccountDetails(User user) {
+        // turn to a table
+        int count = 1;
         for (Map.Entry<String, Account> entry : user.getUserAccounts().entrySet()) {
-            System.out.println(user.getFullName() + entry.getKey() + ":" + +entry.getValue().getAccountBalance());
+            System.out.println(count + " " + user.getFullName() + " " + entry.getKey() + " " + entry.getValue().getAccountType() + " " + entry.getValue().getAccountBalance());
+            count++;
         }
     }
 
@@ -89,4 +100,9 @@ public class AccountServiceImplementation implements IAccountServiceImplementati
         }
         return (account.getAccountBalance() >= amount);
     }
+
+    public String selectAccount(User user, int index){
+        return user.getAccountNumberTracker().get(index - 1);
+    }
+
 }
