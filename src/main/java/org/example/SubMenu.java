@@ -39,7 +39,6 @@ public class SubMenu {
                     case 2:
                         // view accounts
                         helpers.viewAccounts();
-                        displaySeparatorLine();
                         showSubMenu();
                         break;
                     case 3:

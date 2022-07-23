@@ -21,9 +21,7 @@ rules and SOLID principles with Design Architecture.
 Task requirements
 - No database is required for this project. Use any of the data structures you feel appropriate
 - All functional requirements should be completed.
-- Task should be submitted on or before 4pm Wednesday, 11th July 2022.
-- Submissions should be made to this GitHub classroom link:
-  https://classroom.github.com/a/XX0dKYvs
+
   Functional requirements
 - A customer should be able to login.
 - A customer should be able to create an account or multiple accounts (savings or current).
@@ -39,6 +37,4 @@ Task requirements
 - Customer names (first and last) should be sanitized so that it does not start with a digit or a small letter
 - Email address should be in the valid format else user should be prompted to re-enter
 - Password should be minimum 6 characters that include alphanumeric and at least one special characters (@, #, $, %, ^, &, !)
-  Marking Scheme
-  Follow the rubric marking system
-  Minus 5 marks for those who failed to handle errors in their work Add 5 marks for good folder structure and modelling
+  

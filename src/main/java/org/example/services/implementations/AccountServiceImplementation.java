@@ -93,11 +93,15 @@ public class AccountServiceImplementation implements IAccountServiceImplementati
 
     public void getAccountDetails(User user) {
         // turn to a table
+        System.out.println("___________________________________________________________________________________");
+        System.out.printf("|%s| %-20s | %-14s | %-12s | %-15s      |\n", "S/N", "ACCOUNT NAME", "ACCOUNT NUMBER", "ACCOUNT TYPE", "BALANCE");
+        System.out.println("___________________________________________________________________________________");
         int count = 1;
         for (Map.Entry<String, Account> entry : user.getUserAccounts().entrySet()) {
-            System.out.println(count + " " + user.getFullName() + " " + entry.getKey() + " " + entry.getValue().getAccountType() + " " + entry.getValue().getAccountBalance());
+            System.out.printf("|%s  | %-20s | %-14s | %-12s | %-15s      |\n", count, user.getFullName(), entry.getKey(), entry.getValue().getAccountType(), entry.getValue().getAccountBalance());
             count++;
         }
+        System.out.println("___________________________________________________________________________________");
     }
 
     private boolean validateTransaction(Account account, Double amount) {
