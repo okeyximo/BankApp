@@ -35,12 +35,12 @@ public class Testing {
         asi.deposit(u2, "October savings", 2000.0, u2.getAccountNumber());
         asi.deposit(u2, "flexing", 1000.0, u2.getAccountNumber());
 // transfer
-        asi.transfer(u2, u2.getUserAccounts().get(u2.getAccountNumber()), u1.getAccountNumber(), 1500.0, "urgent 1k5");
+//        asi.transfer(u2, u2.getUserAccounts().get(u2.getAccountNumber()), u1.getAccountNumber(), 1500.0, "urgent 1k5");
 
-        asi.getStatementOfAccount(u2.getUserAccounts().get(u2.getAccountNumber()));
-        asi.getStatementOfAccount(u1.getUserAccounts().get(u1.getAccountNumber()));
-        asi.getStatementOfAccount(u2.getUserAccounts().get(u2.getAccountNumber()));
-        asi.getAccountDetails(u1);
+//        asi.getStatementOfAccount(u2.getUserAccounts().get(u2.getAccountNumber()));
+//        asi.getStatementOfAccount(u1.getUserAccounts().get(u1.getAccountNumber()));
+//        asi.getStatementOfAccount(u2.getUserAccounts().get(u2.getAccountNumber()));
+//        asi.getAccountDetails(u1);
 //        asi.selectAccount(u1);
 //        asi.getStatementOfAccount(u1.getUserAccounts().get(u1.getAccountNumber()));
 

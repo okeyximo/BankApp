@@ -44,27 +44,26 @@ public class SubMenu {
                         break;
                     case 3:
                         // deposit
-                        System.out.println("Do something for Sub Menu Option C");
                         deposit();
                         displaySeparatorLine();
                         showSubMenu();
                         break;
                     case 4:
                         // withdraw
-                        System.out.println("Do something for Sub Menu Option D");
+                        withdraw();
                         displaySeparatorLine();
                         showSubMenu();
                         break;
                     case 5:
                         // Transfer
-                        System.out.println("Do something for Sub Menu Option E");
-                        displayAllAccount();
+                        transfer();
                         displaySeparatorLine();
                         showSubMenu();
                         break;
                     case 6:
                         // Show statement of account
                         System.out.println("Do something for Sub Menu Option F");
+                        showStatementOfAccount();
                         displaySeparatorLine();
                         showSubMenu();
                         break;
@@ -82,10 +81,36 @@ public class SubMenu {
         }
     }
 
+    private static void showStatementOfAccount() {
+        User currentUser = getCurrentLogin();
+        int selectedIndex = helpers.selectAccount(currentUser);
+        asi.getStatementOfAccount(currentUser, asi.selectAccount(currentUser, selectedIndex));
+    }
+
+    private static void withdraw() {
+//        currentUserName = bank.getTrackLogin().get(0);
+        User user = getCurrentLogin();
+        int selectedNumber = 0;
+        double amountToWithdraw = 0;
+        String description;
+        if (user.getAccountNumberTracker().size() == 0) {
+            System.out.println("You have not opened any account yet");
+            return;
+        }
+        System.out.println("How much do you want to withdraw");
+        amountToWithdraw = helpers.typeAmount();
+        System.out.println("Enter the transaction description");
+        scanner.nextLine();
+        description = scanner.nextLine();
+        selectedNumber = helpers.selectAccount(user);
+
+        asi.withdraw(user, description, amountToWithdraw, asi.selectAccount(user, selectedNumber));
+    }
+
     // open a new account
     private static void createNewAccount() {
-        currentUserName = bank.getTrackLogin().get(0);
-        User user = bank.getCustomers().get(currentUserName);
+//        currentUserName = bank.getTrackLogin().get(0);
+        User user = getCurrentLogin();
         AccountType accountType;
         int selectAccount = helpers.selectAccountType();
         if (selectAccount == 1) {
@@ -100,8 +125,8 @@ public class SubMenu {
 
     // deposit
     private static void deposit() {
-        currentUserName = bank.getTrackLogin().get(0);
-        User user = bank.getCustomers().get(currentUserName);
+//        currentUserName = bank.getTrackLogin().get(0);
+        User user = getCurrentLogin();
         int selectedNumber = 0;
         double amountToBeDeposited = 0;
         String description;
@@ -116,6 +141,21 @@ public class SubMenu {
         description = scanner.nextLine();
         selectedNumber = helpers.selectAccount(user);
         asi.deposit(user, description, amountToBeDeposited, asi.selectAccount(user, selectedNumber));
+    }
+
+    private static void transfer() {
+        User user = getCurrentLogin();
+        System.out.println("Select the account you are making this transaction from");
+        int selectedNumber = helpers.selectAccount(user);
+        System.out.println("Enter the amount you want to transfer");
+        double amount = helpers.typeAmount();
+        System.out.println("Enter the account Number you are transferring to ");
+        String user2AccountNumber = helpers.enterAccountNumber();
+        System.out.println("Enter the transaction description");
+        String description = scanner.nextLine();
+
+        asi.transfer(user, asi.selectAccount(user, selectedNumber), user2AccountNumber, amount, description);
+
     }
 
     private static void showSubMenu() {
@@ -145,5 +185,10 @@ public class SubMenu {
         bsi.createNewUser("Ok", "Chks", "x@gmail.com", "okx", "@1234qwer");
         bsi.createNewUser("Cj", "Jay", "y@gmail.com", "pet", "@1234q");
         bank.getTrackLogin().add("pet");
+    }
+
+    private static User getCurrentLogin() {
+        currentUserName = bank.getTrackLogin().get(0);
+        return bank.getCustomers().get(currentUserName);
     }
 }

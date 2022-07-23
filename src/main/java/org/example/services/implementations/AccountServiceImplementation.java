@@ -26,50 +26,65 @@ public class AccountServiceImplementation implements IAccountServiceImplementati
 
     /**
      * Deposits the amount into the customers account.
-     * @param user performing the transaction
-     * @param description of the transaction
-     * @param amount to be deposited
+     *
+     * @param user          performing the transaction
+     * @param description   of the transaction
+     * @param amount        to be deposited
      * @param accountNumber in which the money is to be deposited
-     * @return true on success and false on failure.
      */
-    public boolean deposit(User user, String description, Double amount, String accountNumber) {
+    public void deposit(User user, String description, Double amount, String accountNumber) {
         if (user.getUserAccounts().containsKey(accountNumber)) {
             Account userAccount = user.getUserAccounts().get(accountNumber);
             Double previousBalance = userAccount.getAccountBalance();
             userAccount.setAccountBalance(previousBalance + amount);
-            Transaction transaction = new Transaction(description, amount, userAccount.getAccountBalance());
+            Transaction transaction = new Transaction("CREDIT! " + description, amount, userAccount.getAccountBalance());
             userAccount.getTransactionList().add(transaction);
             System.out.println("Transaction Successful");
-            return true;
+            return;
         }
         System.out.println("Transaction failed");
-        return false;
+    }
+
+    public void withdraw(User user, String description, Double amount, String accountNumber) {
+        if (user.getUserAccounts().containsKey(accountNumber)) {
+            Account userAccount = user.getUserAccounts().get(accountNumber);
+            Double previousBalance = userAccount.getAccountBalance();
+            if (previousBalance < amount) {
+                System.out.println("Insufficient funds");
+            } else {
+                userAccount.setAccountBalance(previousBalance - amount);
+                Transaction transaction = new Transaction("DEBIT! " + description, amount, userAccount.getAccountBalance());
+                userAccount.getTransactionList().add(transaction);
+                System.out.println("Transaction Successful");
+                return;
+            }
+        }
+        System.out.println("Transaction failed");
     }
 
     //to be modified
-    public boolean transfer(User user1, Account account, String user2accountNumber, double amount, String description) {
-        if (validateTransaction(account, amount)) {
-            if (bank.getAccountNumbers().containsKey(user2accountNumber)) {
-                User user2 = bank.getAccountNumbers().get(user2accountNumber);
-                Account user2Account = user2.getUserAccounts().get(user2accountNumber);
+    public void transfer(User user1, String accountNumber, String user2accountNumber, double amount, String description) {
+        if (user1.getUserAccounts().containsKey(accountNumber)) {
+            Account userAccount = user1.getUserAccounts().get(accountNumber);
+            if (validateTransaction(userAccount, amount)) {
+                if (bank.getAccountNumbers().containsKey(user2accountNumber)) {
+                    User user2 = bank.getAccountNumbers().get(user2accountNumber);
+                    Account user2Account = user2.getUserAccounts().get(user2accountNumber);
 
-                double user2previousBalance = user2Account.getAccountBalance();
-                double user1previousBalance = account.getAccountBalance();
-                user2Account.setAccountBalance(user2previousBalance + amount);
-                account.setAccountBalance(user1previousBalance - amount);
+                    double user2previousBalance = user2Account.getAccountBalance();
+                    double user1previousBalance = userAccount.getAccountBalance();
+                    user2Account.setAccountBalance(user2previousBalance + amount);
+                    userAccount.setAccountBalance(user1previousBalance - amount);
 
-//                Transaction transactionSender = new Transaction(description, amount, user1Account.getAccountBalance() ); //temporary
-                Transaction transactionReceiver = new Transaction("CREDIT! " + description, amount, user2Account.getAccountBalance());
-
-                bank.getAccountNumbers().get(user2accountNumber).getUserAccounts().get(user2accountNumber).getTransactionList().add(transactionReceiver);
-
-                System.out.println("Transaction Successful");
-                return true;
+                    Transaction transactionSender = new Transaction("DEBIT!" + description, amount, userAccount.getAccountBalance()); //temporary
+                    Transaction transactionReceiver = new Transaction("CREDIT! " + description, amount, user2Account.getAccountBalance());
+                    bank.getAccountNumbers().get(user2accountNumber).getUserAccounts().get(user2accountNumber).getTransactionList().add(transactionReceiver);
+                    System.out.println("Transaction Successful");
+                }
+                return;
             }
         }
         System.out.println("Transaction Failed");
-        return false;
-
     }
 
     /* to be modified*/
@@ -77,8 +92,9 @@ public class AccountServiceImplementation implements IAccountServiceImplementati
         return null;
     }
 
-    public void getStatementOfAccount(Account account) {
-        for (Transaction transaction : account.getTransactionList()) {
+    public void getStatementOfAccount(User user, String accountNumber) {
+        Account userAccount = user.getUserAccounts().get(accountNumber);
+        for (Transaction transaction : userAccount.getTransactionList()) {
             System.out.println(transaction.toString());
         }
     }
@@ -101,8 +117,7 @@ public class AccountServiceImplementation implements IAccountServiceImplementati
         return (account.getAccountBalance() >= amount);
     }
 
-    public String selectAccount(User user, int index){
+    public String selectAccount(User user, int index) {
         return user.getAccountNumberTracker().get(index - 1);
     }
-
 }

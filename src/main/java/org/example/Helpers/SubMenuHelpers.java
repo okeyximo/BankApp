@@ -55,7 +55,6 @@ public class SubMenuHelpers {
             }
         }
         return selectedNumber;
-
     }
 
     public void viewAccounts() {
@@ -65,11 +64,9 @@ public class SubMenuHelpers {
     }
 
     public int selectAccountType() {
-        boolean invalid = true;
         int selection = -1;
         while (true) {
             try {
-                System.out.println(invalid);
                 System.out.println("1. Select CURRENT ACCOUNT");
                 System.out.println("2. Select SAVING ACCOUNT");
                 System.out.println("3. RETURN TO PREVIOUS MENU");
@@ -83,5 +80,21 @@ public class SubMenuHelpers {
         }
         return selection;
     }
-
+    public String enterAccountNumber() {
+        String accountNumber;
+        while (true) {
+            try {
+                String input = scanner.next();
+                if (input.length() == 10) {
+                    accountNumber = input;
+                    break;
+                } else {
+                    System.out.println("Enter the 10 digit account number of the receiver");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Enter the 10 digit account number of the receiver");
+            }
+        }
+        return accountNumber;
+    }
 }
