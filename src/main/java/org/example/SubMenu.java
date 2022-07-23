@@ -30,7 +30,7 @@ public class SubMenu {
                     case 1:
                         // open new account
                         createNewAccount();
-                        // set timeout -> display account details in table
+                        // set timeout -> display account details in table to be done later.
                         displaySeparatorLine();
                         showSubMenu();
                         // debugging
@@ -62,7 +62,6 @@ public class SubMenu {
                         break;
                     case 6:
                         // Show statement of account
-                        System.out.println("Do something for Sub Menu Option F");
                         showStatementOfAccount();
                         displaySeparatorLine();
                         showSubMenu();
@@ -109,7 +108,6 @@ public class SubMenu {
 
     // open a new account
     private static void createNewAccount() {
-//        currentUserName = bank.getTrackLogin().get(0);
         User user = getCurrentLogin();
         AccountType accountType;
         int selectAccount = helpers.selectAccountType();
@@ -125,7 +123,6 @@ public class SubMenu {
 
     // deposit
     private static void deposit() {
-//        currentUserName = bank.getTrackLogin().get(0);
         User user = getCurrentLogin();
         int selectedNumber = 0;
         double amountToBeDeposited = 0;
@@ -157,7 +154,6 @@ public class SubMenu {
         asi.transfer(user, asi.selectAccount(user, selectedNumber), user2AccountNumber, amount, description);
 
     }
-
     private static void showSubMenu() {
         System.out.println("1. Open a new Account");
         System.out.println("2. View Accounts");
@@ -171,22 +167,6 @@ public class SubMenu {
     private static void displaySeparatorLine() {
         System.out.println("________________________________");
     }
-
-    /* Debugging Start */
-    public static void displayAllAccount() {
-        for (User user : bank.getCustomers().values()) {
-            System.out.println(user.toString());
-        }
-    }
-
-
-    // mock data
-    public static void mockUsers() {
-        bsi.createNewUser("Ok", "Chks", "x@gmail.com", "okx", "@1234qwer");
-        bsi.createNewUser("Cj", "Jay", "y@gmail.com", "pet", "@1234q");
-        bank.getTrackLogin().add("pet");
-    }
-
     private static User getCurrentLogin() {
         currentUserName = bank.getTrackLogin().get(0);
         return bank.getCustomers().get(currentUserName);
