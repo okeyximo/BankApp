@@ -21,6 +21,7 @@ public class SubMenuHelpers {
     }
 
     public double typeAmount() {
+        // handle not a input mismatch exception
         double amount;
         while (true) {
             try {

@@ -42,13 +42,13 @@ public class MainMenu {
                     case 4:
                         System.out.println("Exit from menu now");
                         break;
-                    case 5:
-                        //
-                        SubMenu.displaySubMenu(scanner);
-                        showMainMenu();
-                        break;
-                    default:
-                        System.out.println("Please select 1 to 4");
+//                    case 5:
+//                        //
+//                        SubMenu.displaySubMenu(scanner);
+//                        showMainMenu();
+//                        break;
+//                    default:
+//                        System.out.println("Please select 1 to 4");
                 }
             } catch (NumberFormatException nfe) {
                 System.out.println("Select from 1 to 4");
@@ -138,7 +138,7 @@ public class MainMenu {
         System.out.println("2. Sign In");
         System.out.println("3. Admin Login");
         System.out.println("4. To Quit");
-        System.out.println("5. To debug");
+//        System.out.println("5. To debug");
     }
 
     private static boolean validateAdminLogin(){

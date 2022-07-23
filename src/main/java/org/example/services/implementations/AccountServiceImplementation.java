@@ -92,7 +92,6 @@ public class AccountServiceImplementation implements IAccountServiceImplementati
     }
 
     public void getAccountDetails(User user) {
-        // turn to a table
         System.out.println("___________________________________________________________________________________");
         System.out.printf("|%s| %-20s | %-14s | %-12s | %-15s      |\n", "S/N", "ACCOUNT NAME", "ACCOUNT NUMBER", "ACCOUNT TYPE", "BALANCE");
         System.out.println("___________________________________________________________________________________");

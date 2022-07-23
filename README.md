@@ -1,8 +1,16 @@
 # Week 3 - Task
+
+
 ### Intro:
 ### Challenge
 Your task is to create a console application that model’s a Bank and its operations using OOP concepts 
 and SOLID principles with a Design Pattern of your choice.
+### Usage
+- download the jar file,
+- cd to the application dir on your commandline
+- Run on application using the following command
+  `java -jar BankApp.jar`
+### User story
 The result should be displayed in a tabular form as shown below:
 ACCOUNT DETAILS
 |-------------------|-------------------------------|--------------------------|---------------------|
@@ -16,13 +24,13 @@ ACCOUNT STATEMENT ON ACCOUNT NO 0987654321
 |-------------------|-------------------------------|--------------------------|---------------------|
 | 14/07/2021 | Use a USSD code | 1,000 | 10,000 | |------------------- ---------------------------------------------------------------------------------|
 | 10/07/2021 | Atm Trft from Agege | 20000 | 100,000 | |-------------------- --------------------------------------------------------------------------------|
-This task is aimed at evaluating your understanding and implementation of OOP
+- This task is aimed at evaluating your understanding and implementation of OOP
 rules and SOLID principles with Design Architecture.
-Task requirements
+### Task requirements
 - No database is required for this project. Use any of the data structures you feel appropriate
 - All functional requirements should be completed.
 
-  Functional requirements
+### Functional requirements
 - A customer should be able to login.
 - A customer should be able to create an account or multiple accounts (savings or current).
 - A customer should be able to deposit money into his account.
@@ -38,3 +46,14 @@ Task requirements
 - Email address should be in the valid format else user should be prompted to re-enter
 - Password should be minimum 6 characters that include alphanumeric and at least one special characters (@, #, $, %, ^, &, !)
   
+
+
+### Bugs 
+- Have not handled the input mismatch exception on the input amount
+- Have not fixed the admin panel
+- Yet to create a table for the transaction list
+
+- Report any bugs you encountered while using the application.
+### Author
+- Okechukwu Onwuchekwa
+- onwuchekwaokechukwu57@gmail.com
