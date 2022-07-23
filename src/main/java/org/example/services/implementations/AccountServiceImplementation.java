@@ -24,14 +24,6 @@ public class AccountServiceImplementation implements IAccountServiceImplementati
     /* ASI methods */
     Bank bank = Bank.getInstance();
 
-    /**
-     * Deposits the amount into the customers account.
-     *
-     * @param user          performing the transaction
-     * @param description   of the transaction
-     * @param amount        to be deposited
-     * @param accountNumber in which the money is to be deposited
-     */
     public void deposit(User user, String description, Double amount, String accountNumber) {
         if (user.getUserAccounts().containsKey(accountNumber)) {
             Account userAccount = user.getUserAccounts().get(accountNumber);
